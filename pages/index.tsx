@@ -62,7 +62,9 @@ const Home: NextPage = () => {
     {location.lon && <DisplayCity  location={location} />}
     {location.lon && <DisplayWeather location={location} /> }
     </div>
-    
+    <div className='grid'>
+      <button className="btn" onClick={handleGetLocation}>Odśwież</button>
+    </div>
         
       </main>
     </>

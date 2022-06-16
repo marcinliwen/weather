@@ -18,6 +18,9 @@
     border-radius: 20px;
     padding: 4px;
 }
+.temp sup{
+    font-size: 50%;
+}
 .loader {
     position: fixed;
     z-index: 1000;
@@ -30,4 +33,11 @@
     align-items: center;
     justify-content: center;
     font-size: 24px;
+}
+.btn{
+    border: 3px solid #0000001a;
+    border-radius: 20px;
+    width: min-content;
+    margin: auto;
+    padding: 8px 25px;
 }

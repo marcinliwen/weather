@@ -5,7 +5,8 @@ const months: string[] = ['Stycznia', 'Lutego', 'Marca', 'Kwietnia', 'Maja', 'Cz
 
 type Props = {
     timecode: number,
-    month?: string | undefined
+    month?: string | undefined,
+    onlydate?: boolean
 }
 
 type Month = {
@@ -29,8 +30,8 @@ const PrintDate: React.FC<Props> = (props) => {
     }
     return (
             <span>
-                <span className="text-xl">{currentDayName}</span> 
-                <br />
+                {props.onlydate ? '' : <><span className="text-xl">{currentDayName}</span> <br /></>}
+                
                 <span className="text-sm">
                 {currentDayOfMonth < 10 ? '0' + currentDayOfMonth : currentDayOfMonth} 
                 {props.month != 'name' ? '-' : ' '}

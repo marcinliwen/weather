@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react'
 import PrintDate from './PrintDate'
 import PrintTime from './PrintTime'
+import Alert from './Alert'
 
 const WEATHER_API_KEY='37402c5d1707b8228464b358ee9b8998'
 const WEATHER_API_BASE='https://api.openweathermap.org/data/2.5/onecall?'
@@ -24,11 +25,18 @@ type WeatherData= {
             {
                 description: string,
             }
-        ]
+        ],
 
-    }
-    
+
+    },
+    alerts:{
+            description: string,
+            start: number,
+            end: number,
+            sender_name: string
+        }[]
 }
+
 
 const DisplayWeather: React.FC<Location> = ({location}) =>{
     console.log(`${WEATHER_API_BASE}lat=${location.lat}&lon=${location.lon}&lang=PL&exclude=hourly,minutely&appid=${WEATHER_API_KEY}`)
@@ -46,14 +54,14 @@ const DisplayWeather: React.FC<Location> = ({location}) =>{
         fetchData();
     }, [])
     
-    console.log(weatherData && weatherData.current.weather[0])
+    console.log(weatherData && weatherData)
     return(
         <>
         <p className='text-2xl'>
         {weatherData && <PrintDate timecode={weatherData.current.dt} month={'name'}/> } 
         </p>
          
-         {weatherData && <p className='text-5xl my-4 temp'>{Math.round(weatherData.current.temp)}<sup>o</sup></p>}
+         {weatherData && <p className='text-5xl my-4 temp shadow-xl'>{Math.round(weatherData.current.temp)}<sup>o</sup></p>}
          {weatherData && <p className='text-2xl cap mb-6 '>{weatherData.current.weather[0].description}</p> }
          {weatherData && <p>Wschód słońca: <PrintTime timecode={weatherData.current.sunrise} /></p>}
          {weatherData && <p>Zachód słońca: <PrintTime timecode={weatherData.current.sunset} /></p>}
@@ -64,6 +72,7 @@ const DisplayWeather: React.FC<Location> = ({location}) =>{
             
          
             {weatherData.main.pressure && <p>Ciśnienie: {weatherData.main.pressure}hPa</p>} */}
+        {weatherData?.alerts && <div className='bg-red-400 my-12'>{weatherData.alerts.map((item)=>(<Alert key={item.start} alert={item} />))}</div>}
         </>
     )
 }

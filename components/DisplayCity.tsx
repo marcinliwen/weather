@@ -2,7 +2,7 @@ import { stringify } from 'querystring'
 import {useState, useEffect} from 'react'
 
 const WEATHER_API_KEY='37402c5d1707b8228464b358ee9b8998'
-const WEATHER_API_BASE='http://api.openweathermap.org/geo/1.0/reverse?'
+const WEATHER_API_BASE='https://api.openweathermap.org/geo/1.0/reverse?'
 
 
 type Location = {
